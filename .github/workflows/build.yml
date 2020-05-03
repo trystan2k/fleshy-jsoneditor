@@ -22,31 +22,5 @@ jobs:
       run: |
         npm run package
         npm run test
-        npm run storybook:build
-    - uses: actions/upload-artifact@v2
-      with:
-        name: storybook-demo
-        path: storybook-static/
       env:
         CI: true
-
-  deploy:
-
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: storybook-demo
-          path: demo-public
-      - name: Display structure of downloaded files
-        run: ls -R
-
-      - name: Publish
-        uses: netlify/actions/cli@master
-        with:
-          args: deploy --prod --dir=demo-public
-        env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
