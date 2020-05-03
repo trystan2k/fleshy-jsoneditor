@@ -21,6 +21,8 @@ jobs:
     - name: npm package
       run: |
         npm run package
+        npm run test
+        npm run storybook:build
     - uses: actions/upload-artifact@v2
       with:
         name: storybook-demo
@@ -44,7 +46,7 @@ jobs:
       - name: Publish
         uses: netlify/actions/cli@master
         with:
-          args: deploy --dir=demo-public
+          args: deploy --prod --dir=demo-public
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
