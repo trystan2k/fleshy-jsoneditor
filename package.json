@@ -24,7 +24,6 @@
   "main": "fleshy-jsoneditor.js",
   "module": "fleshy-jsoneditor.js",
   "scripts": {
-    "postinstall": "npm run build-deps",
     "build-deps": "rm -rf ./lib && rollup -c && npm run build-deps:minify.browser",
     "build-deps:minify.browser": "uglifyjs lib/json-editor-import.js -c -m --mangle-props regex=/^__/ --toplevel --output lib/json-editor-import.min.js",
     "clear:deps": "rm -rf ./node_modules",
@@ -32,6 +31,7 @@
     "format": "npm run format:eslint && npm run format:prettier",
     "format:eslint": "eslint --ext .js,.html . --fix",
     "format:prettier": "prettier \"**/*.js\" --write",
+    "postinstall": "npm run build-deps",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "lint:eslint": "eslint --ext .js,.html .",
     "lint:prettier": "prettier \"**/*.js\" --check",
@@ -120,6 +120,9 @@
     "node": ">=12"
   },
   "standard-version": {
-    "releaseCommitMessageFormat": "chore: release {{currentTag}}"
+    "releaseCommitMessageFormat": "chore: release {{currentTag}}",
+    "skip": {
+      "tag": true
+    }
   }
 }
