@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-lastest, windows-2016]
-        node-version: [10.x, 12.x]
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -24,7 +24,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: storybook-demo
-        path: story-book-static/
+        path: storybook-static/
       env:
         CI: true
 
