@@ -31,7 +31,6 @@
     "format": "npm run format:eslint && npm run format:prettier",
     "format:eslint": "eslint --ext .js,.html . --fix",
     "format:prettier": "prettier \"**/*.js\" --write",
-    "postinstall": "npm run build-deps",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "lint:eslint": "eslint --ext .js,.html .",
     "lint:prettier": "prettier \"**/*.js\" --check",
