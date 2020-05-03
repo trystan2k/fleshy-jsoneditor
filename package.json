@@ -2,8 +2,25 @@
   "name": "fleshy-jsoneditor",
   "version": "1.0.0",
   "description": "LitElement custom element that wraps http://github.com/josdejong/jsoneditor based on https://github.com/Juicy/juicy-jsoneditor",
+  "keywords": [
+    "jsoneditor",
+    "litelement",
+    "webcomponent",
+    "open-wc"
+  ],
+  "homepage": "https://github.com/trystan2k/fleshy-jsoneditor#readme",
+  "bugs": {
+    "url": "https://github.com/trystan2k/fleshy-jsoneditor/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trystan2k/fleshy-jsoneditor.git"
+  },
   "license": "MIT",
-  "author": "fleshy-jsoneditor",
+  "author": {
+    "name": "Thiago Mendonca",
+    "email": "trystan2k@gmail.com"
+  },
   "main": "fleshy-jsoneditor.js",
   "module": "fleshy-jsoneditor.js",
   "scripts": {
@@ -17,8 +34,8 @@
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "lint:eslint": "eslint --ext .js,.html .",
     "lint:prettier": "prettier \"**/*.js\" --check",
-    "package": "npm run clear:deps && yarn && npm run build-deps && npm run format && npm run test:update-snapshots && npm run docs && npm run storybook:build",
-    "release": "npm run package && standard-version",
+    "package": "npm run clear:deps && yarn && npm run build-deps && npm run lint",
+    "release": "npm run package && npm run format && npm run test:update-snapshots && npm run docs && npm run storybook:build && standard-version",
     "start": "es-dev-server --app-index demo/index.html --node-resolve --open --watch",
     "storybook": "start-storybook",
     "storybook:build": "build-storybook",
@@ -34,10 +51,14 @@
       "pre-push": "npm test"
     }
   },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
-      "prettier --write",
+      "npm run format",
       "git add"
     ],
     "package.json": [
@@ -93,5 +114,11 @@
     "standard-version": "^7.1.0",
     "uglify-es": "^3.3.0",
     "web-component-analyzer": "^1.0.3"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "standard-version": {
+    "releaseCommitMessageFormat": "chore: release {{currentTag}}"
   }
 }
