@@ -1,0 +1,97 @@
+{
+  "name": "fleshy-jsoneditor",
+  "version": "1.0.0",
+  "description": "LitElement custom element that wraps http://github.com/josdejong/jsoneditor based on https://github.com/Juicy/juicy-jsoneditor",
+  "license": "MIT",
+  "author": "fleshy-jsoneditor",
+  "main": "fleshy-jsoneditor.js",
+  "module": "fleshy-jsoneditor.js",
+  "scripts": {
+    "build-deps": "rm -rf ./lib && rollup -c && npm run build-deps:minify.browser",
+    "build-deps:minify.browser": "uglifyjs lib/json-editor-import.js -c -m --mangle-props regex=/^__/ --toplevel --output lib/json-editor-import.min.js",
+    "clear:deps": "rm -rf ./node_modules",
+    "docs": "wca analyze $npm_package_main --outFile custom-elements.json",
+    "format": "npm run format:eslint && npm run format:prettier",
+    "format:eslint": "eslint --ext .js,.html . --fix",
+    "format:prettier": "prettier \"**/*.js\" --write",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "lint:eslint": "eslint --ext .js,.html .",
+    "lint:prettier": "prettier \"**/*.js\" --check",
+    "package": "npm run clear:deps && yarn && npm run build-deps && npm run format && npm run test:update-snapshots && npm run docs && npm run storybook:build",
+    "release": "npm run package && standard-version",
+    "start": "es-dev-server --app-index demo/index.html --node-resolve --open --watch",
+    "storybook": "start-storybook",
+    "storybook:build": "build-storybook",
+    "test": "karma start --coverage",
+    "test:prune-snapshots": "karma start --prune-snapshots",
+    "test:update-snapshots": "karma start --update-snapshots",
+    "test:watch": "karma start --auto-watch=true --single-run=false"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "npm test"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "package.json": [
+      "sort-package-json"
+    ]
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "singleQuote": true
+  },
+  "eslintConfig": {
+    "extends": [
+      "@open-wc/eslint-config",
+      "eslint-config-prettier"
+    ],
+    "ignorePatterns": [
+      "lib/",
+      "node_modules/",
+      "coverage/",
+      "__snapshots__/",
+      "storybook-static/"
+    ]
+  },
+  "dependencies": {
+    "fast-json-patch": "^3.0.0-1",
+    "lit-element": "^2.2.1",
+    "lit-html": "^1.1.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@open-wc/demoing-storybook": "^2.0.0",
+    "@open-wc/eslint-config": "^2.0.0",
+    "@open-wc/testing": "^2.0.0",
+    "@open-wc/testing-karma": "^3.0.0",
+    "base64-img": "^1.0.4",
+    "deepmerge": "^3.2.0",
+    "es-dev-server": "^1.23.0",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "husky": "^1.0.0",
+    "jsoneditor": "^8.6.6",
+    "lint-staged": "^8.0.0",
+    "prettier": "^2.0.4",
+    "rollup": "^1.2.2",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-lit-css": "^2.0.3",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "sinon": "^9.0.2",
+    "sort-package-json": "^1.42.1",
+    "standard-version": "^7.1.0",
+    "uglify-es": "^3.3.0",
+    "web-component-analyzer": "^1.0.3"
+  }
+}
