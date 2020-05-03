@@ -1,13 +1,17 @@
 # \<fleshy-jsoneditor>
 
 ![](https://github.com/trystan2k/fleshy-jsoneditor/workflows/Build-CI/badge.svg)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/ec50add2-cd3d-403b-97c8-886c658803f2/deploy-status)](https://app.netlify.com/sites/fleshy-jsoneditor/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ec50add2-cd3d-403b-97c8-886c658803f2/deploy-status)](https://fleshy-jsoneditor.netlify.app)
 
 LitElement custom element that wraps [josdejong/jsoneditor](http://github.com/josdejong/jsoneditor). 
 
 It is an updated version of [juicy-jsoneditor](https://github.com/Juicy/juicy-jsoneditor)
 
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
+
+## Demo
+
+[Check it live!](https://fleshy-jsoneditor.netlify.app/)
 
 ## Installation
 ```bash
