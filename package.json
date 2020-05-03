@@ -2,8 +2,25 @@
   "name": "fleshy-jsoneditor",
   "version": "1.0.0",
   "description": "LitElement custom element that wraps http://github.com/josdejong/jsoneditor based on https://github.com/Juicy/juicy-jsoneditor",
+  "keywords": [
+    "jsoneditor",
+    "litelement",
+    "webcomponent",
+    "open-wc"
+  ],
+  "homepage": "https://github.com/trystan2k/fleshy-jsoneditor#readme",
+  "bugs": {
+    "url": "https://github.com/trystan2k/fleshy-jsoneditor/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trystan2k/fleshy-jsoneditor.git"
+  },
   "license": "MIT",
-  "author": "fleshy-jsoneditor",
+  "author": {
+    "name": "Thiago Mendonca",
+    "email": "trystan2k@gmail.com"
+  },
   "main": "fleshy-jsoneditor.js",
   "module": "fleshy-jsoneditor.js",
   "scripts": {
@@ -33,6 +50,11 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-push": "npm test"
     }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "lint-staged": {
     "*.js": [
@@ -93,5 +115,11 @@
     "standard-version": "^7.1.0",
     "uglify-es": "^3.3.0",
     "web-component-analyzer": "^1.0.3"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "standard-version": {
+    "releaseCommitMessageFormat": "chore: release {{currentTag}}"
   }
 }
