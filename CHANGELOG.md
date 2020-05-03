@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.0.2...v1.0.3) (2020-05-03)
+
+
+### Bug Fixes
+
+* **github:** change publish step to not upload node_modules ([14e2db7](https://github.com/trystan2k/fleshy-jsoneditor/commit/14e2db7b11dbda8f03d1c4833142139efb577da3))
+
 ### [1.0.2](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.0.1...v1.0.2) (2020-05-03)
 
 
