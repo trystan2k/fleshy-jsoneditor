@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.1.5...v1.2.0) (2020-05-03)
+
+
+### Features
+
+* **.github:** change publish command and remove if from deploy ([d18ad28](https://github.com/trystan2k/fleshy-jsoneditor/commit/d18ad287a8531615f2b664038926e17a1c00b2e6))
+* **lib:** add lib files back to repository ([a891f95](https://github.com/trystan2k/fleshy-jsoneditor/commit/a891f9540dd2e03f76a033a4077062e0d99d1df2))
+
 ### [1.1.5](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.1.4...v1.1.5) (2020-05-03)
 
 ### [1.1.4](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.1.3...v1.1.4) (2020-05-03)
