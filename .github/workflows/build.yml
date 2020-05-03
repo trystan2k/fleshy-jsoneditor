@@ -20,6 +20,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm package
       run: |
-        npm package
+        npm run package
       env:
         CI: true
