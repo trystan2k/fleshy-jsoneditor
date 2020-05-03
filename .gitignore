@@ -20,3 +20,6 @@
 /dist/
 
 package-lock.json
+
+/lib/
+/storybook-static/
