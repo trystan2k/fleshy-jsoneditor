@@ -1,9 +1,6 @@
 name: Build-CI
 
-on:
-  push:
-    branches-ignore:
-      - master
+on: [push]
 
 jobs:
   build:
