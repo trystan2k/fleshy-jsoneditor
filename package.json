@@ -35,7 +35,7 @@
     "lint:eslint": "eslint --ext .js,.html .",
     "lint:prettier": "prettier \"**/*.js\" --check",
     "package": "npm run clear:deps && yarn && npm run build-deps && npm run lint",
-    "release": "npm run package && npm run format && npm run test:update-snapshots && npm run docs && storybook:build && standard-version",
+    "release": "npm run package && npm run format && npm run test:update-snapshots && npm run docs && npm run storybook:build && standard-version",
     "start": "es-dev-server --app-index demo/index.html --node-resolve --open --watch",
     "storybook": "start-storybook",
     "storybook:build": "build-storybook",
@@ -58,8 +58,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
-      "prettier --write",
+      "npm run format",
       "git add"
     ],
     "package.json": [
