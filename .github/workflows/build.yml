@@ -3,7 +3,7 @@ name: Build-CI
 on: [push]
 
 jobs:
-  test:
+  build:
 
     runs-on: ubuntu-latest
 
@@ -13,7 +13,7 @@ jobs:
         node-version: [10.x, 12.x]
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
@@ -21,5 +21,30 @@ jobs:
     - name: npm package
       run: |
         npm run package
+    - uses: actions/upload-artifact@v2
+        with:
+          name: storybook-demo
+          path: story-book-static/
       env:
         CI: true
+
+  deploy:
+
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: storybook-demo
+          path: demo-public
+      - name: Display structure of downloaded files
+        run: ls -R
+
+      - name: Publish
+        uses: netlify/actions/cli@master
+          with:
+            args: deploy --dir=demo-public
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
