@@ -1,6 +1,7 @@
 # \<fleshy-jsoneditor>
 
 ![](https://github.com/trystan2k/fleshy-jsoneditor/workflows/Build-CI/badge.svg)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ec50add2-cd3d-403b-97c8-886c658803f2/deploy-status)](https://app.netlify.com/sites/fleshy-jsoneditor/deploys)
 
 LitElement custom element that wraps [josdejong/jsoneditor](http://github.com/josdejong/jsoneditor). 
 
