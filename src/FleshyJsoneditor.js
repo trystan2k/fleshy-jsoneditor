@@ -258,7 +258,7 @@ export class FleshyJsoneditor extends LitElement {
 
   _injectTheme(themeId) {
     const element = document.querySelector(themeId);
-    this.shadowRoot.appendChild(this._cloneStyle(element));
+    this.appendChild(this._cloneStyle(element));
   }
 
   /* eslint-disable class-methods-use-this */
