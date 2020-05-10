@@ -36,6 +36,7 @@
     "lint:prettier": "prettier \"**/*.js\" --check",
     "package": "npm run clear:deps && yarn && npm run build-deps && npm run lint",
     "prepare-release": "npm run package && npm run format && npm run test:update-snapshots && npm run docs && npm run storybook:build",
+    "push": "git push && git push --tags",
     "release": "standard-version",
     "start": "es-dev-server --app-index demo/index.html --node-resolve --open --watch",
     "storybook": "start-storybook",
