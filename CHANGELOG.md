@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.3](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.2.2...v1.2.3) (2020-05-10)
+
+
+### Bug Fixes
+
+* **js:** use this.appendChild to add theme style ([525961a](https://github.com/trystan2k/fleshy-jsoneditor/commit/525961a320464853bf8dd09bdfadadd029fdd6a4))
+
 ### [1.2.2](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.2.0...v1.2.2) (2020-05-03)
 
 ### [1.2.1](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.2.0...v1.2.1) (2020-05-03)
