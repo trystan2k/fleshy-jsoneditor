@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.4](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.2.3...v1.2.4) (2020-06-10)
+
+
+### Bug Fixes
+
+* **js:** move inject theme to shadowRoot child ([d423935](https://github.com/trystan2k/fleshy-jsoneditor/commit/d423935f854c021539569a525ebf5b58a27ed3d5))
+
 ### [1.2.3](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.2.2...v1.2.3) (2020-05-10)
 
 
