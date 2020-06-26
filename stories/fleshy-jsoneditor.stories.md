@@ -1,3 +1,7 @@
+<!-- markdownlint-disable MD033 -->
+
+# Demo for fleshy-jsoneditor
+
 ```js script
 import { html } from '@open-wc/demoing-storybook';
 import { withKnobs, withWebComponentsKnobs } from '@open-wc/demoing-storybook';
@@ -8,13 +12,11 @@ export default {
   component: 'fleshy-jsoneditor',
   decorators: [withKnobs, withWebComponentsKnobs],
   parameters: { options: { selectedPanel: 'storybookjs/knobs/panel' } },
-  options: { selectedPanel: "storybookjs/knobs/panel" },
+  options: { selectedPanel: 'storybookjs/knobs/panel' },
 };
 ```
 
-# Demo for <fleshy-jsoneditor
-
-LitElement custom element that wraps [josdejong/jsoneditor](http://github.com/josdejong/jsoneditor). 
+LitElement custom element that wraps [josdejong/jsoneditor](http://github.com/josdejong/jsoneditor).
 
 It is an updated version of [juicy-jsoneditor](https://github.com/Juicy/juicy-jsoneditor)
 
@@ -23,11 +25,13 @@ It is an updated version of [juicy-jsoneditor](https://github.com/Juicy/juicy-js
 ### Installation
 
 - With Yarn
+
 ```bash
 yarn add fleshy-jsoneditor
 ```
 
 - With NPM
+
 ```bash
 npm i fleshy-jsoneditor
 ```
@@ -43,7 +47,7 @@ const json = {
   null: null,
   number: 123,
   object: { a: 'b', c: 'd' },
-  string: 'Hello World'
+  string: 'Hello World',
 };
 export const Simple = () => html`
   <fleshy-jsoneditor .json="${json}"></fleshy-jsoneditor>
@@ -61,7 +65,7 @@ Click on canvas and then knobs to see and modify the public api.
 
 ## Variations
 
-###### With `name` attribute
+### With `name` attribute
 
 ```js preview-story
 export const NameAttribute = () => html`
@@ -69,7 +73,7 @@ export const NameAttribute = () => html`
 `;
 ```
 
-###### With `modes` attribute
+### With `modes` attribute
 
 ```js preview-story
 const modes = ['code', 'form', 'text', 'tree', 'view'];
@@ -78,7 +82,7 @@ export const ModesAttribute = () => html`
 `;
 ```
 
-###### With `search` attribute set to `true`
+### With `search` attribute set to `true`
 
 ```js preview-story
 export const SearchAttribute = () => html`
@@ -86,7 +90,7 @@ export const SearchAttribute = () => html`
 `;
 ```
 
-###### With `mode` attribute
+### With `mode` attribute
 
 ```js preview-story
 export const ModeAttribute = () => html`
@@ -94,15 +98,19 @@ export const ModeAttribute = () => html`
 `;
 ```
 
-###### With `indentation` attribute
+### With `indentation` attribute
 
 ```js preview-story
 export const IdentationAttribute = () => html`
-  <fleshy-jsoneditor .json=${json} mode="text" indentation="4"></fleshy-jsoneditor>
+  <fleshy-jsoneditor
+    .json=${json}
+    mode="text"
+    indentation="4"
+  ></fleshy-jsoneditor>
 `;
 ```
 
-###### In `code` mode without any `json` content
+### In `code` mode without any `json` content
 
 ```js preview-story
 export const CodeModeAndNoJSON = () => html`
@@ -110,7 +118,7 @@ export const CodeModeAndNoJSON = () => html`
 `;
 ```
 
-###### In `tree` mode without any `json` content
+### In `tree` mode without any `json` content
 
 ```js preview-story
 export const TreeModeAndNoJSON = () => html`
