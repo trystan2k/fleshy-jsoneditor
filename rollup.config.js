@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import rollup from 'rollup';
-import buble from 'rollup-plugin-buble';
+import buble from '@rollup/plugin-buble';
 import copy from 'rollup-plugin-copy';
-import resolve from 'rollup-plugin-node-resolve';
-import commonJS from 'rollup-plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import commonJS from '@rollup/plugin-commonjs';
 import litcss from 'rollup-plugin-lit-css';
 
 const base64Img = require('base64-img');
