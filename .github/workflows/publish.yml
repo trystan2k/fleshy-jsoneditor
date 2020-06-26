@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - run: echo ${{github.ref}}
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Use Node.js 12.x
       uses: actions/setup-node@v1
       with:
@@ -35,18 +35,43 @@ jobs:
 
     needs: build
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Publish on artifactory
         uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-      - name: npm package, test and storybook generation
+      - name: npm package, test and storybook generation to NPM Repository
         run: |
           yarn
           yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: 'https://npm.pkg.github.com'
+      - name: npm package, test and storybook generation to Github package repository
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  release:
+
+    runs-on: ubuntu-latest
+
+    needs: publish
+    steps:
+      - uses: actions/checkout@v2
+      - name: Release new version
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: false
+          prerelease: false
 
   deploy:
 
