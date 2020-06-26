@@ -120,5 +120,13 @@ To release a new version, once all PRs were merged into `master`, it is just nec
 npm run release
 ```
 
-And push the commit generate by `standard-version` tool. A new tag generated will be pushed to the repository
-and a GitHubAction will take care of it. It will deploy the storybook in Netlify and publish the package in NPM.
+This script will generate new tag, update version in package.json and update changelog file with latest changes.
+
+Once finish, it is just necessary to push the new commit to master. You can do it manually (but remember to push the tags also)
+or use the script
+
+```bash
+npm run push
+```
+
+Once the origin master branch is updated, a GitHubAction will take care of it. It will deploy the storybook in Netlify and publish the package in NPM.
