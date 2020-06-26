@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.2.5...v1.3.0) (2020-06-26)
+
+### Features
+
+- fix lint errors ([52debeb](https://github.com/trystan2k/fleshy-jsoneditor/commit/52debeba51bc669ef34a0bf2ce1741d78173ad66))
+- fix lint errors ([7993d2a](https://github.com/trystan2k/fleshy-jsoneditor/commit/7993d2a98c29fa187bbb16ec374a7a3157479121))
+
 ### [1.2.5](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.2.4...v1.2.5) (2020-06-10)
 
 ### [1.2.4](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.2.3...v1.2.4) (2020-06-10)
