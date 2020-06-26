@@ -29,11 +29,11 @@
     "clear:deps": "rm -rf ./node_modules",
     "docs": "wca analyze $npm_package_main --outFile custom-elements.json",
     "format": "npm run format:eslint && npm run format:prettier",
-    "format:eslint": "eslint --ext .js,.html . --fix",
-    "format:prettier": "prettier \"**/*.js\" --write",
+    "format:eslint": "eslint --ext .js,.html,.json . --fix",
+    "format:prettier": "prettier \"**/*.(js|html|md|json)\" --write",
     "lint": "npm run lint:eslint && npm run lint:prettier",
-    "lint:eslint": "eslint --ext .js,.html .",
-    "lint:prettier": "prettier \"**/*.js\" --check",
+    "lint:eslint": "eslint --ext .js,.html,.json .",
+    "lint:prettier": "prettier \"**/*.(js|html|md|json)\" --check",
     "package": "npm run clear:deps && yarn && npm run build-deps && npm run lint",
     "prepare-release": "npm run package && npm run format && npm run test:update-snapshots && npm run docs && npm run storybook:build",
     "push": "git push && git push --tags",
@@ -59,8 +59,13 @@
     ]
   },
   "lint-staged": {
-    "*.js": [
-      "npm run format",
+    "*.+(js|json|html)": [
+      "prettier --write --list-different --ignore-path .prettierignore",
+      "eslint --fix --ignore-path .prettierignore",
+      "git add"
+    ],
+    "*.+(md)": [
+      "prettier --write --list-different --ignore-path .prettierignore",
       "git add"
     ],
     "package.json": [
@@ -72,16 +77,22 @@
     "singleQuote": true
   },
   "eslintConfig": {
+    "plugins": [
+      "markdown",
+      "json"
+    ],
     "extends": [
       "@open-wc/eslint-config",
-      "eslint-config-prettier"
+      "eslint-config-prettier",
+      "plugin:json/recommended"
     ],
     "ignorePatterns": [
       "lib/",
       "node_modules/",
       "coverage/",
       "__snapshots__/",
-      "storybook-static/"
+      "storybook-static/",
+      "**/*.md"
     ]
   },
   "dependencies": {
@@ -101,6 +112,8 @@
     "es-dev-server": "^1.23.0",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-json": "^2.0.0",
+    "eslint-plugin-markdown": "^1.0.0",
     "husky": "^1.0.0",
     "jsoneditor": "^8.6.8",
     "lint-staged": "^8.0.0",
