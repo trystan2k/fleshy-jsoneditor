@@ -19,14 +19,14 @@ This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
 ## Installation
 
 ```bash
-npm i fleshy-jsoneditor
+npm i @trystan2k/fleshy-jsoneditor@latest
 ```
 
 ## Usage
 
 ```html
 <script type="module">
-  import 'fleshy-jsoneditor/fleshy-jsoneditor.js';
+  import '@trystan2k/fleshy-jsoneditor/fleshy-jsoneditor.js';
 </script>
 
 <fleshy-jsoneditor></fleshy-jsoneditor>
