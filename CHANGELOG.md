@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.3.0...v2.0.0) (2020-06-27)
+
 ## [1.3.0](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.2.5...v1.3.0) (2020-06-26)
 
 ### Features
