@@ -169,7 +169,7 @@ export class FleshyJsoneditor extends LitElement {
 
       /* istanbul ignore else  */
       if (this.json) {
-        this._observer = jsonpatch.observe(this.json, this._refresh);
+        this._observer = jsonpatch.observe(this.json, this._refresh.bind(this));
       }
 
       this._refresh();
