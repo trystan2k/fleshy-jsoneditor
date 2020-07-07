@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.2](https://github.com/trystan2k/fleshy-jsoneditor/compare/v2.0.1...v2.0.2) (2020-07-07)
+
+### Bug Fixes
+
+- **js:** add bind when calling refresh in jsonpatch observer ([5154b2c](https://github.com/trystan2k/fleshy-jsoneditor/commit/5154b2ccce0968c876d0d8736e432648aeb1952a))
+
 ### [2.0.1](https://github.com/trystan2k/fleshy-jsoneditor/compare/v2.0.0...v2.0.1) (2020-06-27)
 
 ## [2.0.0](https://github.com/trystan2k/fleshy-jsoneditor/compare/v1.3.0...v2.0.0) (2020-06-27)
