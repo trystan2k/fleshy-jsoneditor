@@ -138,6 +138,6 @@
     "node": ">=12"
   },
   "standard-version": {
-    "releaseCommitMessageFormat": "chore: release {{currentTag}}"
+    "releaseCommitMessageFormat": "chore(*): release {{currentTag}}"
   }
 }
