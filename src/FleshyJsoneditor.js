@@ -153,6 +153,10 @@ export class FleshyJsoneditor extends LitElement {
   }
 
   updated(changedProps) {
+    console.log(
+      'TCL ~ file: FleshyJsoneditor.js ~ line 156 ~ FleshyJsoneditor ~ updated ~ changedProps',
+      changedProps
+    );
     super.updated(changedProps);
     if (changedProps.has('mode')) {
       this.editor.setMode(this.mode);
@@ -217,6 +221,10 @@ export class FleshyJsoneditor extends LitElement {
       indentation: this.indentation,
 
       onChange: () => {
+        console.log(
+          'TCL ~ file: FleshyJsoneditor.js ~ line 224 ~ FleshyJsoneditor ~ _initializeEditor _ onChange, this: ',
+          this
+        );
         /* istanbul ignore if  */
         if (!this.editor) {
           return;
@@ -239,6 +247,19 @@ export class FleshyJsoneditor extends LitElement {
         }
         jsonpatch.applyPatch(this.json, patches);
         this._observer = jsonpatch.observe(this.json, this._refresh);
+      },
+
+      onError: error => {
+        console.log(
+          'TCL ~ file: FleshyJsoneditor.js ~ line 252 ~ FleshyJsoneditor ~ _initializeEditor ~ onError _ error:',
+          error
+        );
+      },
+      onModeChange: (newMode, oldMode) => {
+        console.log(
+          'TCL ~ file: FleshyJsoneditor.js ~ line 259 ~ FleshyJsoneditor ~ _initializeEditor ~ newMode:oldmode',
+          { newMode, oldMode }
+        );
       },
     };
 
