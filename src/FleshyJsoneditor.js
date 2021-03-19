@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { html, css, LitElement } from 'lit-element';
 import * as jsonpatch from 'fast-json-patch';
 import '../lib/json-editor-import.min.js';
