@@ -222,32 +222,43 @@ export class FleshyJsoneditor extends LitElement {
       indentation: this.indentation,
 
       onChange: () => {
-        console.log(
-          'TCL ~ file: FleshyJsoneditor.js ~ line 224 ~ FleshyJsoneditor ~ _initializeEditor _ onChange, this: ',
-          this
-        );
         /* istanbul ignore if  */
-        if (!this.editor) {
-          return;
+        try {
+          if (!this.editor) {
+            return;
+          }
+
+          const patches = jsonpatch.compare(this.json, this.editor.get());
+
+          this.dispatchEvent(
+            new CustomEvent('change', {
+              detail: {
+                json: this.json,
+                patches,
+              },
+            })
+          );
+
+          /* istanbul ignore else  */
+          if (this._observer) {
+            jsonpatch.unobserve(this.json, this._observer);
+          }
+          jsonpatch.applyPatch(this.json, patches);
+          this._observer = jsonpatch.observe(this.json, this._refresh);
+        } catch (e) {
+          console.log(
+            'TCL ~ file: FleshyJsoneditor.js ~ line 249 ~ FleshyJsoneditor ~ _initializeEditor ~ caught error ~ e',
+            e
+          );
+          this.dispatchEvent(
+            new CustomEvent('change', {
+              detail: {
+                json: this.json,
+                error: e,
+              },
+            })
+          );
         }
-
-        const patches = jsonpatch.compare(this.json, this.editor.get());
-
-        this.dispatchEvent(
-          new CustomEvent('change', {
-            detail: {
-              json: this.json,
-              patches,
-            },
-          })
-        );
-
-        /* istanbul ignore else  */
-        if (this._observer) {
-          jsonpatch.unobserve(this.json, this._observer);
-        }
-        jsonpatch.applyPatch(this.json, patches);
-        this._observer = jsonpatch.observe(this.json, this._refresh);
       },
 
       onError: error => {
@@ -260,6 +271,12 @@ export class FleshyJsoneditor extends LitElement {
         console.log(
           'TCL ~ file: FleshyJsoneditor.js ~ line 259 ~ FleshyJsoneditor ~ _initializeEditor ~ newMode:oldmode',
           { newMode, oldMode }
+        );
+      },
+      onValidate: json => {
+        console.log(
+          'TCL ~ file: FleshyJsoneditor.js ~ line 262 ~ FleshyJsoneditor ~ _initializeEditor ~ onValidate ~ json',
+          json
         );
       },
     };
