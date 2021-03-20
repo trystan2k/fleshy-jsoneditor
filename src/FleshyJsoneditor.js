@@ -125,6 +125,18 @@ export class FleshyJsoneditor extends LitElement {
       history: {
         type: Boolean,
       },
+
+      /**
+       * Default behaviour (from upstream) is to throw a JS error (red console)
+       * when the JSON is in a bad state, e.g. if you delete a JSON key, and the
+       * change event doesn't trigger.  With fireChangeOnBadJson set to true, this
+       * error is trapped, and the @change event does trigger, and adds an error
+       * property to its evt.detail payload.  The error is still logged in the
+       * console as a console.error()
+       */
+      fireChangeOnBadJson: {
+        type: Boolean,
+      },
     };
   }
 
@@ -134,6 +146,7 @@ export class FleshyJsoneditor extends LitElement {
     this.modes = [];
     this.search = false;
     this.history = false;
+    this.fireChangeOnBadJson = false;
   }
 
   firstUpdated() {
@@ -154,10 +167,6 @@ export class FleshyJsoneditor extends LitElement {
   }
 
   updated(changedProps) {
-    console.log(
-      'TCL ~ file: FleshyJsoneditor.js ~ line 156 ~ FleshyJsoneditor ~ updated ~ changedProps',
-      changedProps
-    );
     super.updated(changedProps);
     if (changedProps.has('mode')) {
       this.editor.setMode(this.mode);
@@ -220,15 +229,48 @@ export class FleshyJsoneditor extends LitElement {
       modes: this.modes,
       search: this.search,
       indentation: this.indentation,
+      fireChangeOnBadJson: this.fireChangeOnBadJson,
 
       onChange: () => {
         /* istanbul ignore if  */
-        try {
-          if (!this.editor) {
-            return;
-          }
+        if (!this.editor) {
+          return;
+        }
 
-          const patches = jsonpatch.compare(this.json, this.editor.get());
+        let patches;
+
+        if (this.fireChangeOnBadJson) {
+          try {
+            patches = jsonpatch.compare(this.json, this.editor.get());
+
+            this.dispatchEvent(
+              new CustomEvent('change', {
+                detail: {
+                  json: this.json,
+                  patches,
+                },
+              })
+            );
+
+            /* istanbul ignore else  */
+            if (this._observer) {
+              jsonpatch.unobserve(this.json, this._observer);
+            }
+            jsonpatch.applyPatch(this.json, patches);
+            this._observer = jsonpatch.observe(this.json, this._refresh);
+          } catch (e) {
+            console.error('Error in onChange callback (fleshyJsonEditor): ', e);
+            this.dispatchEvent(
+              new CustomEvent('change', {
+                detail: {
+                  json: this.json,
+                  error: e,
+                },
+              })
+            );
+          }
+        } else {
+          patches = jsonpatch.compare(this.json, this.editor.get());
 
           this.dispatchEvent(
             new CustomEvent('change', {
@@ -245,39 +287,7 @@ export class FleshyJsoneditor extends LitElement {
           }
           jsonpatch.applyPatch(this.json, patches);
           this._observer = jsonpatch.observe(this.json, this._refresh);
-        } catch (e) {
-          console.log(
-            'TCL ~ file: FleshyJsoneditor.js ~ line 249 ~ FleshyJsoneditor ~ _initializeEditor ~ caught error ~ e',
-            e
-          );
-          this.dispatchEvent(
-            new CustomEvent('change', {
-              detail: {
-                json: this.json,
-                error: e,
-              },
-            })
-          );
         }
-      },
-
-      onError: error => {
-        console.log(
-          'TCL ~ file: FleshyJsoneditor.js ~ line 252 ~ FleshyJsoneditor ~ _initializeEditor ~ onError _ error:',
-          error
-        );
-      },
-      onModeChange: (newMode, oldMode) => {
-        console.log(
-          'TCL ~ file: FleshyJsoneditor.js ~ line 259 ~ FleshyJsoneditor ~ _initializeEditor ~ newMode:oldmode',
-          { newMode, oldMode }
-        );
-      },
-      onValidate: json => {
-        console.log(
-          'TCL ~ file: FleshyJsoneditor.js ~ line 262 ~ FleshyJsoneditor ~ _initializeEditor ~ onValidate ~ json',
-          json
-        );
       },
     };
 

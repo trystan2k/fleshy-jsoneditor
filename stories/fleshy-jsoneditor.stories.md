@@ -125,3 +125,32 @@ export const TreeModeAndNoJSON = () => html`
   <fleshy-jsoneditor mode="tree"></fleshy-jsoneditor>
 `;
 ```
+
+### With `fireChangeOnBadJson` attribute
+
+```js preview-story
+export const fireChangeOnBadJsonAttribute = () => {
+  const handleChange = evt => {
+    const el = document.getElementById('jsonStateSpan');
+    if (evt?.detail.error) {
+      console.log('Bad Json');
+      el.textContent = 'bad';
+    } else {
+      console.log('Good json');
+      el.textContent = 'good';
+    }
+  };
+
+  return html`
+    <fleshy-jsoneditor
+      .json=${json}
+      mode="text"
+      @change=${handleChange}
+      fireChangeOnBadJson
+    ></fleshy-jsoneditor>
+    <div style="margin-top: 20px">
+      JSON state is <span id="jsonStateSpan">unknown (presumed good)</span>
+    </div>
+  `;
+};
+```

@@ -92,6 +92,13 @@
           "description": "Enables history, adds a button Undo and Redo to the menu of the JSONEditor.\nOnly applicable when mode is 'tree', 'form', or 'preview'",
           "type": "boolean",
           "default": "false"
+        },
+        {
+          "name": "fireChangeOnBadJson",
+          "attribute": "fireChangeOnBadJson",
+          "description": "When set to true, allows change event to still fire, and adds an error property to its evt.detail payload.",
+          "type": "boolean",
+          "default": "false"
         }
       ],
       "events": [
