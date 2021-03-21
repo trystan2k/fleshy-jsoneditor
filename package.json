@@ -1,6 +1,6 @@
 {
   "name": "@trystan2k/fleshy-jsoneditor",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "LitElement custom element that wraps http://github.com/josdejong/jsoneditor based on https://github.com/Juicy/juicy-jsoneditor",
   "keywords": [
     "jsoneditor",
