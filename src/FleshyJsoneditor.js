@@ -48,6 +48,8 @@ const JSONEditorAPI = [
   ```
 
   @fires change - Event emitted when the json file is updated with the new json file and patches to applied over the original
+  @fires error - Event emitted when error event fired from upstream, or bad JSON is detected at fleshy-editor level
+
 
   @customElement fleshy-jsoneditor
   @LitElement
@@ -221,44 +223,49 @@ export class FleshyJsoneditor extends LitElement {
       indentation: this.indentation,
 
       onChange: () => {
-        console.log(
-          'TCL ~ file: FleshyJsoneditor.js ~ line 224 ~ FleshyJsoneditor ~ _initializeEditor _ onChange, this: ',
-          this
-        );
         /* istanbul ignore if  */
         if (!this.editor) {
           return;
         }
 
-        const patches = jsonpatch.compare(this.json, this.editor.get());
+        try {
+          const patches = jsonpatch.compare(this.json, this.editor.get());
 
-        this.dispatchEvent(
-          new CustomEvent('change', {
-            detail: {
-              json: this.json,
-              patches,
-            },
-          })
-        );
+          this.dispatchEvent(
+            new CustomEvent('change', {
+              detail: {
+                json: this.json,
+                patches,
+              },
+            })
+          );
 
-        /* istanbul ignore else  */
-        if (this._observer) {
-          jsonpatch.unobserve(this.json, this._observer);
+          /* istanbul ignore else  */
+          if (this._observer) {
+            jsonpatch.unobserve(this.json, this._observer);
+          }
+          jsonpatch.applyPatch(this.json, patches);
+          this._observer = jsonpatch.observe(this.json, this._refresh);
+        } catch (e) {
+          this.dispatchEvent(
+            new CustomEvent('error', {
+              detail: {
+                level: 'fleshy',
+                error: e,
+              },
+            })
+          );
         }
-        jsonpatch.applyPatch(this.json, patches);
-        this._observer = jsonpatch.observe(this.json, this._refresh);
       },
 
       onError: error => {
-        console.log(
-          'TCL ~ file: FleshyJsoneditor.js ~ line 252 ~ FleshyJsoneditor ~ _initializeEditor ~ onError _ error:',
-          error
-        );
-      },
-      onModeChange: (newMode, oldMode) => {
-        console.log(
-          'TCL ~ file: FleshyJsoneditor.js ~ line 259 ~ FleshyJsoneditor ~ _initializeEditor ~ newMode:oldmode',
-          { newMode, oldMode }
+        this.dispatchEvent(
+          new CustomEvent('error', {
+            detail: {
+              level: 'upstream',
+              error,
+            },
+          })
         );
       },
     };
