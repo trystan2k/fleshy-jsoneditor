@@ -80,12 +80,10 @@ const modes = ['code', 'form', 'text', 'tree', 'view'];
 export const ModesAttribute = () => {
   const handleError = evt => {
     const el = document.getElementById('jsonStateSpan');
-    console.log('Bad Json');
     el.textContent = 'bad';
   };
   const handleChange = evt => {
     const el = document.getElementById('jsonStateSpan');
-    console.log('Good Json');
     el.textContent = 'good';
   };
   return html`
