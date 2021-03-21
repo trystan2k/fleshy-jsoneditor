@@ -77,27 +77,9 @@ export const NameAttribute = () => html`
 
 ```js preview-story
 const modes = ['code', 'form', 'text', 'tree', 'view'];
-export const ModesAttribute = () => {
-  const handleError = evt => {
-    const el = document.getElementById('jsonStateSpan');
-    el.textContent = 'bad';
-  };
-  const handleChange = evt => {
-    const el = document.getElementById('jsonStateSpan');
-    el.textContent = 'good';
-  };
-  return html`
-    <fleshy-jsoneditor
-      .json=${json}
-      .modes="${modes}"
-      @change=${handleChange}
-      @error="${handleError}"
-    ></fleshy-jsoneditor>
-    <div style="margin-top: 20px">
-      JSON state is <span id="jsonStateSpan">unknown (presumed good)</span>
-    </div>
-  `;
-};
+export const ModesAttribute = () => html`
+  <fleshy-jsoneditor .json=${json} .modes="${modes}"></fleshy-jsoneditor>
+`;
 ```
 
 ### With `search` attribute set to `true`
@@ -142,4 +124,30 @@ export const CodeModeAndNoJSON = () => html`
 export const TreeModeAndNoJSON = () => html`
   <fleshy-jsoneditor mode="tree"></fleshy-jsoneditor>
 `;
+```
+
+### Capturing error event to check if JSON is valid
+
+```js preview-story
+export const ErrorHandling = () => {
+  const handleError = evt => {
+    const el = document.getElementById('jsonStateSpan');
+    el.textContent = 'bad';
+  };
+  const handleChange = evt => {
+    const el = document.getElementById('jsonStateSpan');
+    el.textContent = 'good';
+  };
+  return html`
+    <fleshy-jsoneditor
+      .json=${json}
+      mode="code"
+      @change=${handleChange}
+      @error="${handleError}"
+    ></fleshy-jsoneditor>
+    <div style="margin-top: 20px">
+      JSON state is <span id="jsonStateSpan">unknown (presumed good)</span>
+    </div>
+  `;
+};
 ```

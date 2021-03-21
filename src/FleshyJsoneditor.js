@@ -155,10 +155,6 @@ export class FleshyJsoneditor extends LitElement {
   }
 
   updated(changedProps) {
-    console.log(
-      'TCL ~ file: FleshyJsoneditor.js ~ line 156 ~ FleshyJsoneditor ~ updated ~ changedProps',
-      changedProps
-    );
     super.updated(changedProps);
     if (changedProps.has('mode')) {
       this.editor.setMode(this.mode);
