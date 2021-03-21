@@ -106,6 +106,45 @@ describe('fleshy-jsoneditor', () => {
     });
   });
 
+  it('fires an event with when when data is invalid', async () => {
+    const el = await fixture(html`
+      <fleshy-jsoneditor name="my-json" mode="code"> </fleshy-jsoneditor>
+    `);
+
+    return new Promise(resolve => {
+      el.addEventListener('change', () => {
+        assert.fail('Should not send change event if input is invalid');
+      });
+
+      el.addEventListener('error', event => {
+        expect(event.detail.level).to.equal('fleshy');
+        expect(event.detail.error).to.not.be.undefined;
+        resolve();
+      });
+
+      const textArea = el.shadowRoot.querySelector('textarea.ace_text-input');
+      const evt = new Event('input');
+      textArea.value = ',';
+      textArea.dispatchEvent(evt);
+    });
+  });
+
+  it('fires an event if onError callback is called', async () => {
+    const el = await fixture(html`
+      <fleshy-jsoneditor name="my-json" mode="code"> </fleshy-jsoneditor>
+    `);
+
+    return new Promise(resolve => {
+      el.addEventListener('error', event => {
+        expect(event.detail.level).to.equal('upstream');
+        expect(event.detail.error).to.not.be.undefined;
+        resolve();
+      });
+
+      el.editor._onError('Error');
+    });
+  });
+
   it('DOM - Structure test', async () => {
     const el = await fixture(html`<fleshy-jsoneditor></fleshy-jsoneditor> `);
     assert.dom.equalSnapshot(el);
