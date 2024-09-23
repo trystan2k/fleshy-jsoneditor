@@ -125,7 +125,7 @@
     "jsoneditor": "^9.0.0",
     "lint-staged": "^10.2.0",
     "prettier": "^2.0.4",
-    "rollup": "^2.0.0",
+    "rollup": "^3.29.5",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-lit-css": "^2.0.3",
     "sinon": "^9.0.2",
